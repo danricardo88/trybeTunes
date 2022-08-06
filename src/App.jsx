@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Album from './pages/Album';
 import Favorites from './pages/Favorites';
@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
 
-class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <main>
@@ -26,5 +26,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
