@@ -20,14 +20,14 @@ export default class Login extends Component {
       // const lengthPassword = password.length;
       const minUser = 3;
       // const minPassword = 6;
-      const test = lengthUser <= minUser/* || lengthPassword < minPassword */;
+      const test = lengthUser < minUser/* || lengthPassword < minPassword */;
       this.setState({ isDisable: test });
     });
   }
 
   handleClick = async (e) => {
-    e.preventDefault();
     const { user } = this.state;
+    e.preventDefault();
     this.setState({ loading: true });
     await createUser({ name: user });
     this.setState({ loading: true }, () => {
@@ -39,16 +39,18 @@ export default class Login extends Component {
   render() {
     const { isDisable, user, /* password */ loading } = this.state;
     return loading ? <Loading /> : (
-      <fieldset>
-        <legend data-testid="page-login">Login</legend>
+      <fieldset data-testid="page-login">
+        <legend>
+          Name:
+        </legend>
         <div>
           <input
-            type="text"
+            type="user"
             name="user"
             value={ user }
             required
             onChange={ this.handleChange }
-            ata-testid="login-name-input"
+            data-testid="login-name-input"
             placeholder="Insira seu user name"
           />
         </div>
