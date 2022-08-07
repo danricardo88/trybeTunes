@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Favorites from '../pages/Favorites';
-import Profile from '../pages/Profile';
-import Search from '../pages/Search';
+// import Favorites from '../pages/Favorites';
+// import Profile from '../pages/Profile';
+// import Search from '../pages/Search';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
 
@@ -21,15 +21,17 @@ export default class Header extends Component {
 
   render() {
     const { user, loading } = this.state;
-    return (
+    return loading ? <Loading /> : (
       <header data-testid="header-component">
         <h3 data-testid="header-user-name">
-          { loading ? <Loading /> : user}
+          { user }
         </h3>
         <nav>
-          <Link to={ Search } data-testid="link-to-search"> Search </Link>
-          <Link to={ Favorites } data-testid="link-to-favorites"> Favorites </Link>
-          <Link to={ Profile } data-testid="link-to-profile"> Profile </Link>
+          <Link to="/search" data-testid="link-to-search"> Search </Link>
+          <br />
+          <Link to="/favorites" data-testid="link-to-favorites"> Favorites </Link>
+          <br />
+          <Link to="/profile" data-testid="link-to-profile"> Profile </Link>
         </nav>
       </header>
     );
