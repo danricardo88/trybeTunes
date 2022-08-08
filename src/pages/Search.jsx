@@ -14,13 +14,13 @@ export default class Search extends Component {
 
   };
 
-  async componentDidMount() {
-    const apiSearch = await searchAlbumAPI();
-    this.setState({
-      loading: true,
-      album: apiSearch,
-    });
-  }
+  // async componentDidMount() {
+  //   const apiSearch = await searchAlbumAPI();
+  //   this.setState({
+  //     loading: true,
+  //     album: apiSearch,
+  //   });
+  // }
 
   handleInputSearch = (e) => {
     this.setState({
@@ -33,6 +33,26 @@ export default class Search extends Component {
       this.setState({ isDisable: test });
     });
   };
+
+  handleSearch = (e) => {
+    e.preventDeFault();
+    this.setState({ loading: true }, async () => {
+      const { inputSearch } = this.state;
+      const album = await searchAlbumAPI(inputSearch);
+      this.setState({
+        album,
+        loading: false,
+
+        artist: inputSearch,
+        inputSearch: '',
+      }, () => {
+        const min = 0;
+        const testAlbum = album.length;
+        const test = testAlbum === min;
+        this.setState({ isDisable: test });
+      });
+    });
+  }
 
   render() {
     const { inputSearch, isDisable, loading } = this.state;
@@ -57,13 +77,7 @@ export default class Search extends Component {
             Pesquisar
           </button>
         </fieldset>
-        <div>
-          {/* {!album.length ?
-          <h1> Nenhum álbum foi encontrado </h1> :
-          <h2>
-            { `....resultados:${...}` }
-          </h2> } */}
-        </div>
+        <div> </div>
       </div>
     );
   }
