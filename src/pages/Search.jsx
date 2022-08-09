@@ -31,6 +31,7 @@ export default class Search extends Component {
       artist: inputSearch,
       inputSearch: '',
     }, () => {
+      const { album } = this.state;
       const min = 0;
       const testAlbum = album.length;
       const test = testAlbum === min;
@@ -78,12 +79,11 @@ export default class Search extends Component {
           album.length === 0 && (<p>`Nenhum álbum foi encontrado`</p>)
         } */}
         {
-          album.length > 0(
+          album.length > 0 && (
             <main>
               <p>
-                Resultado:
-                {''}
-                {artist}
+                Resultado de álbuns de:
+                {` ${artist}`}
               </p>
               {
                 album.map(({
@@ -109,11 +109,11 @@ export default class Search extends Component {
                   </div>
                 ))
               }
-            </main>,
+            </main>
           )
         }
         {
-          album.length === 0 && (<p>`Nenhum álbum foi encontrado`</p>)
+          album.length === 0 && (<p>Nenhum álbum foi encontrado</p>)
         }
       </div>
     );
